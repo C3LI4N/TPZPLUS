@@ -11,25 +11,7 @@ window.TPZ_STREAMS = [
         forceLive: true,
         langues: [
             { code: "FR", label: "Français", url: "https://ton-lien-stream1.m3u8" }
-        ],
-        stats: {
-            possession: [58, 42],
-            tirsCadres: [6, 3],
-            passesReussies: [89, 81],
-            fautes: [10, 14],
-            cartonsJaunes: [1, 3],
-            corners: [5, 2]
-        },
-        timeline: [
-            { time: "72'", icon: "⚽", title: "But !", desc: "Action magnifique de Mbappé" },
-            { time: "60'", icon: "🔄", title: "Changement", desc: "Entrée de l'attaquant star" },
-            { time: "45'", icon: "🟨", title: "Carton Jaune", desc: "Faute au milieu de terrain" },
-            { time: "12'", icon: "😮", title: "Occasion manquée", desc: "Tir sur la barre transversale" }
-        ],
-        compositions: {
-            home: ["Gardien", "Défenseur 1", "Défenseur 2", "Milieu 1", "Attaquant"],
-            away: ["Gardien", "Défenseur 1", "Défenseur 2", "Milieu 1", "Attaquant"]
-        }
+        ]
     },
     {
         id: "qatar-iran",
