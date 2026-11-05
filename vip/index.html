@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TPZ+ | Live</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="dark"] {
+  --bg: #000; --bg-gradient: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+  --text: #fff; --text2: rgba(255,255,255,.7); --text3: rgba(255,255,255,.4);
+  --accent: #10B981; --accent-light: #34D399; --accent-glow: rgba(16,185,129,0.25);
+  --glass: rgba(255,255,255,0.03); --glass-hover: rgba(255,255,255,0.08);
+  --hair: rgba(255,255,255,0.08); --hair-light: rgba(255,255,255,0.2);
+  --nav-bg: rgba(10,10,10,0.5);
+  --glass-shadow: 0 20px 40px -10px rgba(0,0,0,0.8);
+  --glass-inner: inset 0 1px 0 rgba(255,255,255,0.15);
+  --btn-bg: #fff; --btn-text: #000;
+}
+[data-theme="light"] {
+  --bg: #EEF0F3; --bg-gradient: linear-gradient(180deg, #F7F8FA 0%, #E8EAEE 100%);
+  --text: #1A1D21; --text2: #5A6069; --text3: #8A9099;
+  --accent: #059669; --accent-light: #10B981; --accent-glow: rgba(5,150,105,0.18);
+  --glass: rgba(255,255,255,0.65); --glass-hover: rgba(255,255,255,0.85);
+  --hair: rgba(255,255,255,0.9); --hair-light: rgba(200,205,215,0.6);
+  --nav-bg: rgba(255,255,255,0.7);
+  --glass-shadow: 0 15px 35px -12px rgba(30,40,60,0.15), 0 2px 6px rgba(30,40,60,0.06);
+  --glass-inner: inset 0 1px 0 rgba(255,255,255,1);
+  --btn-bg: #1A1D21; --btn-text: #fff;
+}
+:root { --radius: 24px; --radius-sm: 12px; --ease: cubic-bezier(0.25,1,0.5,1); }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-gradient);background-attachment:fixed;color:var(--text);font-family:'Inter',sans-serif;font-size:15px;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;transition:background 0.4s ease, color 0.4s ease}
+body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(circle at 10% 10%, var(--accent-glow), transparent 40%), radial-gradient(circle at 90% 90%, var(--glass-hover), transparent 50%);filter:blur(80px);opacity:0.7;transition:background 0.4s ease}
+body>*{position:relative;z-index:1}
+a{color:inherit;text-decoration:none}
+
+.nav-wrap{position:sticky;top:0;z-index:100;padding:16px 24px}
+.nav{height:64px;padding:0 24px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);backdrop-filter:blur(40px) saturate(200%);border:1px solid var(--hair);border-radius:999px;box-shadow:var(--glass-shadow), var(--glass-inner);transition:background 0.4s ease}
+.brand{display:flex;align-items:center;gap:2px;font-size:22px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg, var(--text) 20%, var(--accent-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand .plus{color:var(--accent);-webkit-text-fill-color:var(--accent);font-size:26px}
+.back{font-size:14px;font-weight:600;color:var(--text2);padding:8px 20px;border:1px solid var(--hair);border-radius:999px;transition:all .2s}
+.back:hover{color:var(--text);background:var(--glass)}
+
+main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:24px 24px 80px}
+.title{font-size:32px;font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.meta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:13px;font-weight:700;margin-bottom:24px}
+.chip{background:var(--glass);border:1px solid var(--hair);padding:6px 14px;border-radius:999px;color:var(--text2)}
+.chip.live{color:var(--accent-light);border-color:rgba(16,185,129,0.3);display:flex;align-items:center;gap:6px;background:rgba(16,185,129,0.1)}
+.chip.live .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-light);box-shadow:0 0 10px var(--accent-light);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.stream-layout { display: flex; gap: 20px; align-items: flex-start; }
+@media(max-width: 1024px) { .stream-layout { flex-direction: column; } }
+
+.player-wrap { flex: 1; min-width: 0; width: 100%; }
+.player{background:#000;border:1px solid var(--hair-light);border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9;width:100%;position:relative;box-shadow:var(--glass-shadow)}
+
+.player-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: #000; cursor: pointer; transition: all 0.3s ease; }
+.player-placeholder:hover { background: #111; }
+[data-theme="light"] .player-placeholder { background: #d4d6da; }
+[data-theme="light"] .player-placeholder:hover { background: #c4c7cc; }
+.player-placeholder-icon { width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border: 2px solid rgba(255,255,255,0.3); display: grid; place-items: center; font-size: 32px; color: #fff; transition: all 0.3s ease; }
+[data-theme="light"] .player-placeholder-icon { background: rgba(0,0,0,0.15); border-color: rgba(0,0,0,0.2); color: #1A1D21; }
+.player-placeholder:hover .player-placeholder-icon { background: var(--accent); color: #000; transform: scale(1.1); border-color: var(--accent); }
+.player-placeholder-text { color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; }
+[data-theme="light"] .player-placeholder-text { color: #5A6069; }
+
+.player iframe,.player video{width:100%;height:100%;border:0;display:block}
+.shield{position:absolute;left:0;right:0;z-index:5}
+.shield.top{top:0;height:12%}
+.shield.bot{bottom:0;height:4%}
+
+.chat-panel { width: 320px; flex-shrink: 0; background: var(--glass); border: 1px solid var(--hair); border-radius: var(--radius); backdrop-filter: blur(30px); display: flex; flex-direction: column; height: 400px; box-shadow: var(--glass-inner); }
+@media(max-width: 1024px) { .chat-panel { width: 100%; height: 300px; } }
+.chat-header { padding: 16px 20px; border-bottom: 1px solid var(--hair); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); }
+.chat-messages { flex: 1; padding: 16px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scrollbar-width: none; }
+.chat-messages::-webkit-scrollbar { display: none; }
+.msg { display: flex; gap: 10px; font-size: 13px; line-height: 1.4; animation: fadeUp .3s ease; }
+.msg-avatar { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #333, #555); flex-shrink: 0; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #fff; }
+.msg-text { color: var(--text2); }
+.msg-text strong { color: var(--text); font-weight: 600; }
+.chat-input-wrap { padding: 12px 16px; border-top: 1px solid var(--hair); }
+.chat-input { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--hair); border-radius: 999px; padding: 10px 16px; color: var(--text); font-family: inherit; font-size: 13px; outline: none; transition: border-color .2s; }
+[data-theme="light"] .chat-input { background: rgba(0,0,0,0.05); }
+.chat-input:focus { border-color: var(--accent); }
+
+.tabs-container { margin-top: 32px; }
+.tabs-header { display: flex; gap: 8px; border-bottom: 1px solid var(--hair); padding-bottom: 16px; margin-bottom: 24px; overflow-x: auto; scrollbar-width: none; }
+.tabs-header::-webkit-scrollbar { display: none; }
+.t-btn { font-size: 14px; font-weight: 700; color: var(--text3); padding: 8px 16px; border-radius: 999px; transition: all .2s; white-space: nowrap; }
+.t-btn:hover { color: var(--text2); }
+.t-btn.active { background: var(--text); color: var(--bg); }
+[data-theme="light"] .t-btn.active { color: #fff; background: #1A1D21; }
+
+.tab-content { display: none; animation: fadeUp .5s var(--ease) forwards; }
+.tab-content.active { display: block; }
+
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media(max-width: 800px) { .stats-grid { grid-template-columns: 1fr; } }
+.glass-panel { background: var(--glass); border: 1px solid var(--hair); border-radius: var(--radius); padding: 24px; backdrop-filter: blur(30px); box-shadow: var(--glass-inner); }
+.glass-panel h3 { font-size: 16px; font-weight: 800; margin-bottom: 20px; letter-spacing: -0.5px; }
+
+.stat-row { margin-bottom: 18px; }
+.stat-labels { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.stat-bar { height: 8px; background: rgba(127,127,127,0.15); border-radius: 999px; display: flex; overflow: hidden; }
+.stat-bar span { height: 100%; transition: width 1s var(--ease); }
+.stat-bar .home { background: var(--accent); border-radius: 999px 0 0 999px; box-shadow: 0 0 10px var(--accent-glow); }
+.stat-bar .away { background: var(--text); border-radius: 0 999px 999px 0; }
+
+.timeline { display: flex; flex-direction: column; gap: 20px; position: relative; }
+.timeline::before { content:""; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: var(--hair); }
+.tl-item { display: flex; gap: 20px; align-items: flex-start; position: relative; }
+.tl-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--glass); border: 1px solid var(--hair); display: grid; place-items: center; font-size: 16px; z-index: 1; flex-shrink: 0; }
+.tl-content { font-size: 14px; line-height: 1.4; font-weight: 600; padding-top: 8px; }
+.tl-content span { color: var(--text3); font-size: 12px; display: block; margin-top: 4px; font-weight: 500; }
+
+.note { margin-top: 32px; padding: 20px; background: var(--glass); border: 1px solid var(--hair); border-radius: var(--radius); font-size: 13px; color: var(--text2); line-height: 1.6; font-weight: 500; }
+.note a { color: var(--accent-light); font-weight: 700; }
+
+.error{text-align:center;padding:100px 20px}
+.error h2{font-size:24px;font-weight:900;margin-bottom:12px}
+.error p{color:var(--text2);margin-bottom:24px}
+.error a{background:var(--btn-bg);color:var(--btn-text);padding:12px 28px;border-radius:999px;font-weight:700;display:inline-block}
+
+@media(max-width:700px){
+  .nav-wrap{padding:10px} .nav{padding:0 12px;height:56px;gap:8px} .brand{font-size:18px}
+  main{padding:12px}
+  .title{font-size:24px}
+  .shield.top{height:28%}
+  .shield.bot{height:12%}
+  .chat-panel { height: 250px; }
+}
+</style>
+<script>
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('tpz-theme') || 'dark');
+</script>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <a href="../index.html" class="brand">TPZ<span class="plus">+</span></a>
+    <a href="../index.html" class="back">← Retour</a>
+  </nav>
+</div>
+
+<main id="app">
+  <div class="error"><h2>Chargement...</h2></div>
+</main>
+
+<script src="../streams.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+function parisTime(s){
+  if(!s) return 0;
+  if(!s.includes('Z')&&!s.includes('+')) return new Date(s+'+02:00').getTime();
+  return new Date(s).getTime();
+}
+function isHls(u){return /\.(m3u8|mpd)(\?|$)/i.test(u)}
+
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const app = document.getElementById('app');
+const match = (window.TPZ_STREAMS||[]).find(m=>m.id===id);
+
+if(!match){
+  app.innerHTML = `<div class="error"><h2>Match introuvable</h2><p>Le contenu demandé n'existe pas.</p><a href="../index.html">Retour à l'accueil</a></div>`;
+} else {
+  const t = parisTime(match.heureDebut);
+  const live = match.forceLive || !match.heureDebut || t <= Date.now();
+
+  if(!live){
+    app.innerHTML = `<div class="error"><h2>⏰ Pas encore en direct</h2><p>Le match n'a pas encore commencé.</p><a href="../index.html">Retour</a></div>`;
+  } else {
+    const url = match.url || (match.langues && match.langues[0] && match.langues[0].url);
+    const sportLabel = (match.sport||'').replace(/^[\p{Emoji}\s]+/u,'') || 'Direct';
+
+    const statsHTML = match.stats ? `
+      <div class="stat-row">
+        <div class="stat-labels"><span>Possession</span><span>${match.stats.possession[0]}% - ${match.stats.possession[1]}%</span></div>
+        <div class="stat-bar"><span class="home" style="width:${match.stats.possession[0]}%"></span><span class="away" style="width:${match.stats.possession[1]}%"></span></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-labels"><span>Tirs cadrés</span><span>${match.stats.tirsCadres[0]} - ${match.stats.tirsCadres[1]}</span></div>
+        <div class="stat-bar"><span class="home" style="width:${(match.stats.tirsCadres[0]/(match.stats.tirsCadres[0]+match.stats.tirsCadres[1]))*100}%"></span><span class="away" style="width:${(match.stats.tirsCadres[1]/(match.stats.tirsCadres[0]+match.stats.tirsCadres[1]))*100}%"></span></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-labels"><span>Passes réussies</span><span>${match.stats.passesReussies[0]}% - ${match.stats.passesReussies[1]}%</span></div>
+        <div class="stat-bar"><span class="home" style="width:${match.stats.passesReussies[0]}%"></span><span class="away" style="width:${match.stats.passesReussies[1]}%"></span></div>
+      </div>
+    ` : '<p style="color:var(--text3);font-size:13px">Stats non disponibles</p>';
+
+    const timelineHTML = match.timeline ? match.timeline.map(ev => `
+      <div class="tl-item">
+        <div class="tl-icon">${ev.icon}</div>
+        <div class="tl-content">${ev.title}<span>${ev.time} - ${ev.desc}</span></div>
+      </div>
+    `).join('') : '<p style="color:var(--text3);font-size:13px">Aucun événement</p>';
+
+    const compoHome = match.compositions ? match.compositions.home.map((p,i)=>`${i+1}. ${p}`).join('<br>') : '';
+    const compoAway = match.compositions ? match.compositions.away.map((p,i)=>`${i+1}. ${p}`).join('<br>') : '';
+
+    app.innerHTML = `
+      <div class="header">
+        <h1 class="title">${match.nom}</h1>
+        <div class="meta">
+          <span class="chip live"><span class="dot"></span> En direct</span>
+          <span class="chip">${sportLabel}</span>
+          ${match.competition?`<span class="chip">${match.competition}</span>`:''}
+        </div>
+      </div>
+      
+      <div class="stream-layout">
+        <div class="player-wrap">
+          <div class="player" id="player">
+            <div class="player-placeholder" id="playerPlaceholder">
+              <div class="player-placeholder-icon">▶</div>
+              <div class="player-placeholder-text">Cliquer pour lancer le flux</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-panel">
+          <div class="chat-header">Live Chat</div>
+          <div class="chat-messages" id="chat-messages">
+            <div class="msg"><div class="msg-avatar" style="background:var(--accent);color:#000">A</div><div class="msg-text"><strong>Alex</strong> Allez !!! 🔥</div></div>
+            <div class="msg"><div class="msg-avatar">M</div><div class="msg-text"><strong>Marc</strong> Quel arrêt du gardien !</div></div>
+            <div class="msg"><div class="msg-avatar" style="background:#FF375F">S</div><div class="msg-text"><strong>Sarah</strong> On y croit 💪</div></div>
+          </div>
+          <div class="chat-input-wrap">
+            <input type="text" class="chat-input" placeholder="Envoyer un message..." id="chat-input">
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs-container">
+        <div class="tabs-header">
+          <button class="t-btn active" onclick="switchTab('stats', this)">Statistiques</button>
+          <button class="t-btn" onclick="switchTab('timeline', this)">Fil du match</button>
+          ${match.compositions ? '<button class="t-btn" onclick="switchTab(\'compos\', this)">Compositions</button>' : ''}
+        </div>
+
+        <div class="tab-content active" id="tab-stats">
+          <div class="stats-grid">
+            <div class="glass-panel">
+              <h3>Statistiques</h3>
+              ${statsHTML}
+            </div>
+            <div class="glass-panel">
+              <h3>Discipline</h3>
+              ${match.stats ? `
+                <div class="stat-row">
+                  <div class="stat-labels"><span>Fautes</span><span>${match.stats.fautes[0]} - ${match.stats.fautes[1]}</span></div>
+                  <div class="stat-bar"><span class="home" style="width:${(match.stats.fautes[0]/(match.stats.fautes[0]+match.stats.fautes[1]))*100}%"></span><span class="away" style="width:${(match.stats.fautes[1]/(match.stats.fautes[0]+match.stats.fautes[1]))*100}%"></span></div>
+                </div>
+                <div class="stat-row">
+                  <div class="stat-labels"><span>Cartons Jaunes</span><span>${match.stats.cartonsJaunes[0]} - ${match.stats.cartonsJaunes[1]}</span></div>
+                  <div class="stat-bar"><span class="home" style="width:${(match.stats.cartonsJaunes[0]/(match.stats.cartonsJaunes[0]+match.stats.cartonsJaunes[1]))*100}%"></span><span class="away" style="width:${(match.stats.cartonsJaunes[1]/(match.stats.cartonsJaunes[0]+match.stats.cartonsJaunes[1]))*100}%"></span></div>
+                </div>
+                <div class="stat-row">
+                  <div class="stat-labels"><span>Corners</span><span>${match.stats.corners[0]} - ${match.stats.corners[1]}</span></div>
+                  <div class="stat-bar"><span class="home" style="width:${(match.stats.corners[0]/(match.stats.corners[0]+match.stats.corners[1]))*100}%"></span><span class="away" style="width:${(match.stats.corners[1]/(match.stats.corners[0]+match.stats.corners[1]))*100}%"></span></div>
+                </div>
+              ` : '<p style="color:var(--text3);font-size:13px">Stats non disponibles</p>'}
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-timeline">
+          <div class="glass-panel" style="max-width:600px">
+            <h3>Fil du match</h3>
+            <div class="timeline">${timelineHTML}</div>
+          </div>
+        </div>
+
+        ${match.compositions ? `
+        <div class="tab-content" id="tab-compos">
+          <div class="stats-grid">
+            <div class="glass-panel"><h3>Équipe A</h3><p style="color:var(--text2);font-size:14px;line-height:2">${compoHome}</p></div>
+            <div class="glass-panel"><h3>Équipe B</h3><p style="color:var(--text2);font-size:14px;line-height:2">${compoAway}</p></div>
+          </div>
+        </div>` : ''}
+      </div>
+
+      <div class="note">
+        💡 <strong>Astuce :</strong> si le flux ne se lance pas, rechargez la page. <br>
+        Source externe : <a href="https://cdnlivetv.is/" target="_blank">CDN Live TV</a>. TPZ+ n'héberge aucun contenu.
+      </div>
+    `;
+
+    const placeholder = document.getElementById('playerPlaceholder');
+    const player = document.getElementById('player');
+    let loaded = false;
+
+    placeholder.addEventListener('click', () => {
+      if(loaded) return;
+      loaded = true;
+      placeholder.remove();
+
+      if(isHls(url)){
+        player.innerHTML = '<video id="vid" controls autoplay playsinline style="width:100%;height:100%;background:#000"></video>';
+        const vid = document.getElementById('vid');
+        if(window.Hls && Hls.isSupported()){
+          const hls = new Hls(); hls.loadSource(url); hls.attachMedia(vid);
+        } else if(vid.canPlayType('application/vnd.apple.mpegurl')){
+          vid.src = url;
+        } else {
+          player.innerHTML = '<div class="error"><h2>Format non supporté</h2></div>';
+        }
+      } else {
+        player.innerHTML = `<iframe src="${url}" allowfullscreen allow="autoplay; encrypted-media; fullscreen"></iframe><div class="shield top"></div><div class="shield bot"></div>`;
+      }
+    });
+
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+    chatInput.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter' && chatInput.value.trim()) {
+        const msg = document.createElement('div');
+        msg.className = 'msg';
+        msg.style.animation = 'fadeUp 0.3s ease forwards';
+        msg.innerHTML = `<div class="msg-avatar" style="background:var(--text);color:var(--bg)">Moi</div><div class="msg-text"><strong>Moi</strong> ${chatInput.value}</div>`;
+        chatMessages.appendChild(msg);
+        chatInput.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    });
+  }
+}
+
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+</script>
+</body>
+</html>

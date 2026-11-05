@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DMCA - TPZ+</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="dark"] { --bg:#000;--bg-gradient:linear-gradient(180deg,#0a0a0a 0%,#000 100%);--text:#fff;--text2:rgba(255,255,255,.7);--text3:rgba(255,255,255,.4);--accent:#10B981;--accent-light:#34D399;--glass:rgba(255,255,255,0.03);--hair:rgba(255,255,255,0.08);--nav-bg:rgba(10,10,10,0.5);--glass-shadow:0 20px 40px -10px rgba(0,0,0,0.8);--glass-inner:inset 0 1px 0 rgba(255,255,255,0.15); }
+[data-theme="light"] { --bg:#f5f5f7;--bg-gradient:linear-gradient(180deg,#fff 0%,#f5f5f7 100%);--text:#1d1d1f;--text2:rgba(0,0,0,.65);--text3:rgba(0,0,0,.4);--accent:#059669;--accent-light:#10B981;--glass:rgba(255,255,255,0.6);--hair:rgba(0,0,0,0.06);--nav-bg:rgba(255,255,255,0.7);--glass-shadow:0 20px 40px -10px rgba(0,0,0,0.15);--glass-inner:inset 0 1px 0 rgba(255,255,255,0.8); }
+:root{--radius:24px;--ease:cubic-bezier(0.25,1,0.5,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-gradient);background-attachment:fixed;color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(circle at 10% 10%, rgba(16,185,129,0.1), transparent 40%);filter:blur(80px)}
+body>*{position:relative;z-index:1}
+a{color:var(--accent-light);text-decoration:underline;text-underline-offset:3px}
+
+.nav-wrap{position:sticky;top:0;z-index:100;padding:16px 24px}
+.nav{height:64px;padding:0 24px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);backdrop-filter:blur(40px) saturate(200%);border:1px solid var(--hair);border-radius:999px;box-shadow:var(--glass-shadow),var(--glass-inner)}
+.brand{display:flex;align-items:center;gap:2px;font-size:22px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--text) 20%,var(--accent-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand .plus{color:var(--accent);-webkit-text-fill-color:var(--accent);font-size:26px}
+.back{font-size:14px;font-weight:600;color:var(--text2);padding:8px 20px;border:1px solid var(--hair);border-radius:999px;transition:all .2s}
+.back:hover{color:var(--text);background:var(--glass)}
+
+main{flex:1;max-width:720px;width:100%;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:32px;font-weight:900;letter-spacing:-1.5px;margin-bottom:24px}
+h2{font-size:18px;font-weight:800;margin:32px 0 12px;letter-spacing:-0.5px}
+p,li{color:var(--text2);font-size:15px;margin-bottom:12px}
+ul{padding-left:20px;margin-bottom:16px}
+li{margin-bottom:6px}
+
+footer{padding:32px 24px;border-top:1px solid var(--hair);display:flex;flex-direction:column;align-items:center;gap:12px;font-size:12px;color:var(--text3)}
+.foot-nav{display:flex;gap:8px 20px;flex-wrap:wrap;justify-content:center}
+.foot-nav a{padding:6px 12px;border-radius:999px;color:var(--text3);text-decoration:none}
+.foot-nav a:hover{color:var(--text);background:var(--glass)}
+
+@media(max-width:700px){
+  .nav-wrap{padding:10px}.nav{padding:0 12px;height:56px;gap:8px}.brand{font-size:18px}
+  main{padding:24px 16px 60px}
+  h1{font-size:24px}
+  h2{font-size:16px}
+}
+</style>
+<script>
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('tpz-theme') || 'dark');
+</script>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <a href="/" class="brand">TPZ<span class="plus">+</span></a>
+    <a href="/" class="back">← Retour</a>
+  </nav>
+</div>
+
+<main>
+  <h1>Mentions légales</h1>
+
+<h2>Éditeur</h2>
+<p>TPZ+ est un site d'agrégation de liens vers des flux en direct. Le site n'est affilié à aucune chaîne, ligue ou détenteur de droits.</p>
+
+<h2>Hébergement</h2>
+<p>Le site est hébergé sur une plateforme statique. Aucune donnée n'est stockée côté serveur.</p>
+
+<h2>Nature du contenu</h2>
+<p>TPZ+ ne stocke et ne diffuse aucun contenu vidéo. Le site référence uniquement des liens externes hébergés par des plateformes tierces, notamment :</p>
+<ul>
+  <li><a href="https://www.fctv33.com/" target="_blank" rel="noopener">FCTV33</a></li>
+  <li><a href="https://cdnlivetv.is/" target="_blank" rel="noopener">CDN Live TV</a></li>
+</ul>
+
+<h2>Propriété intellectuelle</h2>
+<p>Les marques, logos et noms cités appartiennent à leurs propriétaires respectifs. Aucune revendication n'est faite sur ces éléments.</p>
+
+<h2>Responsabilité</h2>
+<p>TPZ+ ne peut être tenu responsable du contenu diffusé par les sources externes, ni de leur disponibilité.</p>
+
+<h2>Données personnelles</h2>
+<p>Aucune donnée personnelle n'est collectée. Aucun cookie de traçage n'est utilisé. Voir la page <a href="/confidentialite.html">Confidentialité</a>.</p>
+</main>
+
+<footer>
+  <div class="foot-nav">
+    <a href="/dmca.html">DMCA</a>
+    <a href="/mentions.html">Mentions</a>
+    <a href="/conditions.html">Conditions</a>
+    <a href="/confidentialite.html">Confidentialité</a>
+  </div>
+</footer>
+
+</body>
+</html>
