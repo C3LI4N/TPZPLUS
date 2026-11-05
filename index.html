@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TPZ+ | L'Expérience Sportive</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============ THÈMES ============ */
+:root, [data-theme="dark"] {
+  --bg: #000000;
+  --bg-gradient: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+  --text: #ffffff;
+  --text2: rgba(255,255,255,0.7);
+  --text3: rgba(255,255,255,0.4);
+  --accent: #10B981;
+  --accent-light: #34D399;
+  --accent-glow: rgba(16,185,129,0.25);
+  --glass-bg: rgba(255,255,255,0.03);
+  --glass-hover: rgba(255,255,255,0.08);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-border-light: rgba(255,255,255,0.25);
+  --glass-shadow: 0 20px 40px -10px rgba(0,0,0,0.8);
+  --glass-inner-glow: inset 0 1px 0 rgba(255,255,255,0.15);
+  --nav-bg: rgba(10,10,10,0.5);
+  --btn-bg: #ffffff;
+  --btn-text: #000000;
+}
+
+/* ============ MODE CLAIR RETRAVAILLÉ ============ */
+[data-theme="light"] {
+  --bg: #EEF0F3;
+  --bg-gradient: linear-gradient(180deg, #F7F8FA 0%, #E8EAEE 100%);
+  --text: #1A1D21;
+  --text2: #5A6069;
+  --text3: #8A9099;
+  --accent: #059669;
+  --accent-light: #10B981;
+  --accent-glow: rgba(5,150,105,0.18);
+  --glass-bg: rgba(255,255,255,0.65);
+  --glass-hover: rgba(255,255,255,0.85);
+  --glass-border: rgba(255,255,255,0.9);
+  --glass-border-light: rgba(200,205,215,0.6);
+  --glass-shadow: 0 15px 35px -12px rgba(30,40,60,0.15), 0 2px 6px rgba(30,40,60,0.06);
+  --glass-inner-glow: inset 0 1px 0 rgba(255,255,255,1);
+  --nav-bg: rgba(255,255,255,0.7);
+  --btn-bg: #1A1D21;
+  --btn-text: #ffffff;
+}
+
+:root{
+  --radius-sm: 12px;
+  --radius-md: 24px;
+  --radius-lg: 36px;
+  --radius-pill: 999px;
+  --ease: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+body::before{
+  content: ""; position: fixed; inset: -20%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 10%, var(--accent-glow), transparent 40%),
+    radial-gradient(circle at 85% 90%, var(--glass-hover), transparent 50%);
+  filter: blur(80px);
+  transition: background 0.4s ease;
+  opacity: 0.7;
+}
+body > *{position: relative; z-index: 1}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* ============ NAVBAR ============ */
+.nav-wrap { position: sticky; top: 0; z-index: 100; padding: 16px 24px; }
+.nav{
+  height: 64px; padding: 0 24px; max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.brand{
+  display: flex; align-items: center; gap: 2px;
+  font-size: 22px; font-weight: 900; letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--text) 20%, var(--accent-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.brand .plus { color: var(--accent); -webkit-text-fill-color: var(--accent); font-size: 26px; }
+
+.tabs{ display: flex; gap: 4px; }
+.tab{
+  padding: 8px 16px; border-radius: var(--radius-pill);
+  font-size: 14px; font-weight: 600; color: var(--text2);
+  transition: all .3s var(--ease);
+}
+.tab:hover { color: var(--text); background: var(--glass-bg); }
+.tab.active { color: var(--bg); background: var(--text); }
+[data-theme="light"] .tab.active { color: #fff; background: #1A1D21; }
+
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 16px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  color: var(--text); transition: all 0.3s var(--ease);
+}
+.icon-btn:hover { background: var(--glass-hover); transform: scale(1.05); }
+
+/* ============ MAIN ============ */
+main{ flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 20px 24px 80px; }
+.panel{ display: none; }
+.panel.active { display: block; animation: fadeUp .6s var(--ease) forwards; }
+@keyframes fadeUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+
+.hero {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  margin-bottom: 32px; padding: 48px;
+  background: linear-gradient(135deg, var(--accent-glow) 0%, var(--glass-bg) 100%);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  min-height: 240px;
+  backdrop-filter: blur(20px);
+}
+[data-theme="light"] .hero {
+  background: linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(255,255,255,0.7) 100%);
+}
+.hero-badge {
+  background: var(--text); color: var(--bg); font-size: 11px; font-weight: 800;
+  padding: 6px 12px; border-radius: var(--radius-pill); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 48px); font-weight: 900; letter-spacing: -1.5px;
+  line-height: 1.1; margin-bottom: 12px; max-width: 600px;
+}
+.hero p { font-size: 15px; color: var(--text2); max-width: 500px; margin-bottom: 24px; font-weight: 500; }
+.btn-hero {
+  background: var(--accent); color: #000; padding: 12px 28px;
+  border-radius: var(--radius-pill); font-size: 14px; font-weight: 700;
+  transition: all .3s var(--ease); box-shadow: 0 8px 25px var(--accent-glow);
+}
+.btn-hero:hover { transform: scale(1.05); background: var(--accent-light); }
+
+.search-wrap { margin-bottom: 24px; }
+.search-container { position: relative; }
+.search-input {
+  width: 100%; padding: 14px 20px 14px 48px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill); color: var(--text);
+  font-family: inherit; font-size: 15px; font-weight: 500;
+  outline: none; transition: all 0.3s var(--ease);
+  backdrop-filter: blur(20px);
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+.search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text3); }
+
+.filters { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+.filters::-webkit-scrollbar { display: none; }
+.filter-pill {
+  padding: 8px 18px; border-radius: var(--radius-pill);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  color: var(--text2); font-size: 13px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; transition: all 0.3s var(--ease);
+}
+.filter-pill:hover { color: var(--text); }
+.filter-pill.active { background: var(--accent); color: #000; border-color: transparent; }
+
+.section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
+.section-head h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+.comp-label {
+  font-size: 12px; font-weight: 700; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 1.5px;
+  margin: 32px 0 12px; display: flex; align-items: center; gap: 12px;
+}
+.comp-label::after { content:""; flex:1; height:1px; background: var(--glass-border); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.channels-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+
+.match {
+  position: relative; display: flex; padding: 16px; gap: 16px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md); backdrop-filter: blur(30px);
+  box-shadow: var(--glass-shadow), var(--glass-inner-glow);
+  transition: all 0.3s var(--ease); overflow: hidden;
+}
+.match:hover { background: var(--glass-hover); border-color: var(--glass-border-light); transform: translateY(-2px); }
+.match.is-live { border-color: rgba(16,185,129,0.3); }
+
+.match-img {
+  width: 72px; height: 72px; border-radius: 16px;
+  object-fit: cover; background: var(--glass-bg); flex-shrink: 0;
+  border: 1px solid var(--glass-border);
+}
+.match-body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; min-width: 0; }
+
+.status { font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+.status.live { color: var(--accent-light); }
+.status.waiting { color: var(--text3); }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.status.live .status-dot { box-shadow: 0 0 10px var(--accent); animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+
+.match-name { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btn-watch {
+  background: var(--btn-bg); color: var(--btn-text); padding: 6px 16px; border-radius: var(--radius-pill);
+  font-size: 12px; font-weight: 700; align-self: flex-start; margin-top: 4px;
+  transition: all .2s var(--ease);
+}
+.btn-watch:hover { background: var(--accent); color: #000; }
+.btn-soon {
+  background: transparent; color: var(--text3); border: 1px solid var(--glass-border);
+  padding: 6px 16px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 600; align-self: flex-start;
+}
+
+.channel {
+  display: flex; align-items: center; gap: 12px; padding: 12px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md); transition: all .3s var(--ease);
+}
+.channel:hover { background: var(--glass-hover); transform: translateY(-2px); }
+.channel.offline { opacity: .4; pointer-events: none; }
+.channel-logo {
+  width: 48px; height: 48px; border-radius: 12px; object-fit: contain;
+  background: #fff; padding: 4px; border: 1px solid var(--glass-border);
+}
+.channel-info { flex: 1; min-width: 0; }
+.channel-name { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.channel-meta { font-size: 11px; color: var(--text3); margin-top: 2px; font-weight: 600; }
+.channel:not(.offline) .channel-meta { color: var(--accent); }
+
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text3); font-size: 14px; }
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 32px 24px; border-top: 1px solid var(--glass-border);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  font-size: 12px; color: var(--text3); font-weight: 500;
+  transition: border-color 0.4s ease;
+}
+.foot-nav { display: flex; gap: 8px 20px; flex-wrap: wrap; justify-content: center; }
+.foot-nav a {
+  padding: 6px 12px; border-radius: var(--radius-pill);
+  transition: all .2s; cursor: pointer; color: var(--text3);
+}
+.foot-nav a:hover { color: var(--text); background: var(--glass-bg); }
+.foot-sources { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.foot-sources a { color: var(--text2); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:700px){
+  .nav-wrap { padding: 10px; }
+  .nav { padding: 0 12px; height: 56px; gap: 8px; }
+  .brand { font-size: 18px; }
+  .brand .plus { font-size: 22px; }
+  .tabs { gap: 2px; }
+  .tab { padding: 6px 10px; font-size: 12px; }
+  .nav-actions .icon-btn { width: 36px; height: 36px; font-size: 14px; }
+  main { padding: 12px 12px 60px; }
+  .hero { padding: 28px 20px; min-height: 200px; border-radius: var(--radius-md); }
+  .hero h1 { font-size: 26px; }
+  .hero p { font-size: 14px; }
+  .section-head h2 { font-size: 20px; }
+  .grid, .channels-grid { grid-template-columns: 1fr; }
+  .match { padding: 12px; gap: 12px; }
+  .match-img { width: 56px; height: 56px; border-radius: 12px; }
+  .match-name { font-size: 14px; }
+  .search-input { padding: 12px 16px 12px 42px; font-size: 14px; }
+  footer { padding: 24px 12px; }
+}
+
+html.intro .nav-wrap { opacity: 0; transform: translateY(-20px); }
+html.intro main > * { opacity: 0; transform: translateY(20px); }
+html.intro footer { opacity: 0; }
+.nav-wrap, main > *, footer { transition: all .6s var(--ease); }
+</style>
+
+<script>
+  const savedTheme = localStorage.getItem('tpz-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.documentElement.classList.add('intro');
+  setTimeout(() => document.documentElement.classList.remove('intro'), 100);
+</script>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <a href="index.html" class="brand">TPZ<span class="plus">+</span></a>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-panel="matches">Matchs</button>
+      <button class="tab" data-panel="channels">Chaînes</button>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" title="Thème">🌙</button>
+    </div>
+  </nav>
+</div>
+
+<main>
+  <div class="panel active" id="panel-matches">
+    <div class="hero">
+      <span class="hero-badge">À la une</span>
+      <h1>Vivez le sport<br>autrement.</h1>
+      <p>Les plus grands matchs en direct. Une expérience fluide et immersive.</p>
+      <button class="btn-hero" id="heroBtn">Voir les directs →</button>
+    </div>
+    
+    <div class="search-wrap">
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Rechercher un match, une équipe...">
+      </div>
+    </div>
+    
+    <div class="filters" id="filters"></div>
+    <div id="matches-content"></div>
+  </div>
+  
+  <div class="panel" id="panel-channels">
+    <div class="section-head"><h2>Toutes les chaînes</h2></div>
+    <div class="grid channels-grid" id="channels-content"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-nav">
+    <a href="dmca.html">DMCA</a>
+    <a href="mentions.html">Mentions légales</a>
+    <a href="conditions.html">Conditions</a>
+    <a href="confidentialite.html">Confidentialité</a>
+  </div>
+  <div class="foot-sources">
+    <span>Sources</span>
+    <a href="https://www.fctv33.com/" target="_blank" rel="noopener">FCTV33</a>
+    <a href="https://cdnlivetv.is/" target="_blank" rel="noopener">CDN Live TV</a>
+  </div>
+</footer>
+
+<script src="streams.js"></script>
+<script src="channels.js"></script>
+<script>
+const FALLBACK = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='80' height='80' rx='20' fill='%23111'/><circle cx='40' cy='40' r='14' fill='%2310B981' opacity='0.3'/></svg>";
+
+let currentFilter = 'all';
+let currentSearch = '';
+
+function parisTime(s){
+  if(!s) return 0;
+  if(!s.includes('Z')&&!s.includes('+')) return new Date(s+'+02:00').getTime();
+  return new Date(s).getTime();
+}
+
+function renderFilters() {
+  const sports = ['all', ...new Set((window.TPZ_STREAMS||[]).map(m => m.sport))];
+  const el = document.getElementById('filters');
+  el.innerHTML = sports.map(s => {
+    const label = s === 'all' ? 'Tous' : s.replace(/^[\p{Emoji}\s]+/u,'') || s;
+    return `<button class="filter-pill ${s === currentFilter ? 'active' : ''}" data-sport="${s}">${label}</button>`;
+  }).join('');
+  el.querySelectorAll('.filter-pill').forEach(btn => {
+    btn.addEventListener('click', () => { currentFilter = btn.dataset.sport; renderMatches(); });
+  });
+}
+
+function renderMatches(){
+  const cont = document.getElementById('matches-content');
+  let all = (window.TPZ_STREAMS||[]).filter(m => m.visible !== false);
+
+  if(currentFilter !== 'all') all = all.filter(m => m.sport === currentFilter);
+  if(currentSearch) {
+    const q = currentSearch.toLowerCase();
+    all = all.filter(m => 
+      m.nom.toLowerCase().includes(q) || 
+      (m.competition||'').toLowerCase().includes(q) ||
+      (m.sport||'').toLowerCase().includes(q)
+    );
+  }
+
+  renderFilters();
+
+  if(!all.length){
+    cont.innerHTML = `<div class="empty-state">Aucun match trouvé.</div>`;
+    return;
+  }
+
+  all.sort((a,b)=>(a.priorite||99)-(b.priorite||99));
+
+  const groups = {};
+  all.forEach(m => {
+    const s = m.sport || "Autres";
+    if(!groups[s]) groups[s] = [];
+    groups[s].push(m);
+  });
+
+  let html = '';
+  for(const s in groups){
+    html += `<div class="comp-label">${s}</div><div class="grid">`;
+    groups[s].forEach(m => {
+      let isLive = true;
+      if(m.forceLive) isLive = true;
+      else if(m.heureDebut && parisTime(m.heureDebut) > Date.now()) isLive = false;
+
+      const status = isLive 
+        ? `<div class="status live"><span class="status-dot"></span>En direct</div>` 
+        : `<div class="status waiting">À venir</div>`;
+      const btn = isLive 
+        ? `<button class="btn-watch" onclick="location.href='vip/index.html?id=${m.id}'">Regarder</button>` 
+        : `<button class="btn-soon" disabled>Bientôt</button>`;
+
+      html += `
+        <div class="match ${isLive?'is-live':''}" style="${isLive?'':'opacity:.6'}">
+          <img class="match-img" src="${m.image||FALLBACK}" alt="" onerror="this.onerror=null;this.src='${FALLBACK}'">
+          <div class="match-body">
+            ${status}
+            <div class="match-name">${m.nom}</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px">${m.competition||''}</div>
+            ${btn}
+          </div>
+        </div>`;
+    });
+    html += '</div>';
+  }
+  cont.innerHTML = html;
+}
+
+async function renderChannels(){
+  const cont = document.getElementById('channels-content');
+  if(!window.TPZ_CHANNELS_LOADED && typeof loadChannels === 'function') await loadChannels();
+  const chans = window.TPZ_CHANNELS || [];
+
+  if(!chans.length){ cont.innerHTML = '<div class="empty-state">Aucune chaîne.</div>'; return; }
+
+  cont.innerHTML = chans.map(ch => {
+    const online = ch.status === 'online';
+    const link = online ? `channel.html?name=${encodeURIComponent(ch.name)}&url=${encodeURIComponent(ch.url)}` : '#';
+    return `
+      <a class="channel ${online?'':'offline'}" href="${link}">
+        <img class="channel-logo" src="${ch.image||FALLBACK}" alt="" onerror="this.onerror=null;this.src='${FALLBACK}'">
+        <div class="channel-info">
+          <div class="channel-name">${ch.name}</div>
+          <div class="channel-meta">${online?'● En direct':'Hors ligne'}</div>
+        </div>
+      </a>`;
+  }).join('');
+}
+
+// THEME TOGGLE
+const themeBtn = document.getElementById('themeToggle');
+function updateThemeIcon() {
+  themeBtn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '🌙' : '☀️';
+}
+themeBtn.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('tpz-theme', next);
+  updateThemeIcon();
+});
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  currentSearch = e.target.value;
+  renderMatches();
+});
+
+document.getElementById('heroBtn').addEventListener('click', () => {
+  document.getElementById('matches-content').scrollIntoView({behavior:'smooth'});
+});
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  });
+});
+
+updateThemeIcon();
+renderMatches();
+renderChannels();
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
