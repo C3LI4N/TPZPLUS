@@ -2,7 +2,7 @@
  * ⚠️ METS TON API ICI
  * Format attendu : [{ name, url, image, status: 'online' | 'offline' }]
  */
-const TPZ_CHANNELS_API = ''; // Ex: 'https://ton-api.com/channels.json'
+const TPZ_CHANNELS_API = 'https://api.cdnlivetv.is/api/v1/channels/?user=cdnlivetv&plan=free'; // Ex: 'https://ton-api.com/channels.json'
 
 const CHANNELS_FALLBACK = [
     { name: "TF1", url: "https://exemple.com/tf1.m3u8", image: "", status: "online" },
