@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.setAttribute('data-theme', localStorage.getItem('tpz-theme') || 'dark');</script>
 <style>
 :root, [data-theme="dark"] {
   --bg: #000; --bg-gradient: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
@@ -57,7 +58,6 @@ main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:24px 24px 80px}
 
 .stream-layout { display: flex; gap: 20px; align-items: flex-start; }
 @media(max-width: 1024px) { .stream-layout { flex-direction: column; } }
-
 .player-wrap { flex: 1; min-width: 0; width: 100%; }
 .player{background:#000;border:1px solid var(--hair-light);border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9;width:100%;position:relative;box-shadow:var(--glass-shadow)}
 
@@ -137,9 +137,6 @@ main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:24px 24px 80px}
   .chat-panel { height: 250px; }
 }
 </style>
-<script>
-  document.documentElement.setAttribute('data-theme', localStorage.getItem('tpz-theme') || 'dark');
-</script>
 </head>
 <body>
 
@@ -154,6 +151,7 @@ main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:24px 24px 80px}
   <div class="error"><h2>Chargement...</h2></div>
 </main>
 
+<script src="../links.js"></script>
 <script src="../streams.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>

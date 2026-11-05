@@ -1,16 +1,18 @@
-const CACHE_NAME = 'tpz-v1';
+const CACHE_NAME = 'tpz-v2';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/streams.js',
-  '/channels.js',
-  '/favicon.svg',
-  '/site.webmanifest'
+  './',
+  './index.html',
+  './channel.html',
+  './links.js',
+  './streams.js',
+  './channels.js',
+  './site.webmanifest',
+  './favicon.svg'
 ];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())
   );
 });
 
@@ -23,16 +25,18 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  if(e.request.method !== 'GET') return;
+  if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
   
-  // Ne pas cacher les iframes, flux, APIs
-  if(url.pathname.includes('/vip/') || url.pathname.includes('channel')) return;
+  // Ne pas intercepter les iframes, flux et APIs
+  if (url.pathname.includes('/vip/') || url.pathname.includes('channel') || url.hostname !== location.hostname) {
+    return;
+  }
   
   e.respondWith(
     caches.match(e.request).then(cached => {
       return cached || fetch(e.request).then(res => {
-        if(res && res.status === 200 && url.origin === self.location.origin) {
+        if (res && res.status === 200) {
           const clone = res.clone();
           caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
         }

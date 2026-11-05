@@ -4,23 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DMCA - TPZ+</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.setAttribute('data-theme', localStorage.getItem('tpz-theme') || 'dark');</script>
 <style>
-:root, [data-theme="dark"] { --bg:#000;--bg-gradient:linear-gradient(180deg,#0a0a0a 0%,#000 100%);--text:#fff;--text2:rgba(255,255,255,.7);--text3:rgba(255,255,255,.4);--accent:#10B981;--accent-light:#34D399;--glass:rgba(255,255,255,0.03);--hair:rgba(255,255,255,0.08);--nav-bg:rgba(10,10,10,0.5);--glass-shadow:0 20px 40px -10px rgba(0,0,0,0.8);--glass-inner:inset 0 1px 0 rgba(255,255,255,0.15); }
-[data-theme="light"] { --bg:#f5f5f7;--bg-gradient:linear-gradient(180deg,#fff 0%,#f5f5f7 100%);--text:#1d1d1f;--text2:rgba(0,0,0,.65);--text3:rgba(0,0,0,.4);--accent:#059669;--accent-light:#10B981;--glass:rgba(255,255,255,0.6);--hair:rgba(0,0,0,0.06);--nav-bg:rgba(255,255,255,0.7);--glass-shadow:0 20px 40px -10px rgba(0,0,0,0.15);--glass-inner:inset 0 1px 0 rgba(255,255,255,0.8); }
+:root, [data-theme="dark"] {
+  --bg: #000; --bg-gradient: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+  --text: #fff; --text2: rgba(255,255,255,.7); --text3: rgba(255,255,255,.4);
+  --accent: #10B981; --accent-light: #34D399; --accent-glow: rgba(16,185,129,0.25);
+  --glass: rgba(255,255,255,0.03); --hair: rgba(255,255,255,0.08);
+  --nav-bg: rgba(10,10,10,0.5);
+  --glass-shadow: 0 20px 40px -10px rgba(0,0,0,0.8);
+  --glass-inner: inset 0 1px 0 rgba(255,255,255,0.15);
+  --btn-bg: #fff; --btn-text: #000;
+}
+[data-theme="light"] {
+  --bg: #EEF0F3; --bg-gradient: linear-gradient(180deg, #F7F8FA 0%, #E8EAEE 100%);
+  --text: #1A1D21; --text2: #5A6069; --text3: #8A9099;
+  --accent: #059669; --accent-light: #10B981; --accent-glow: rgba(5,150,105,0.18);
+  --glass: rgba(255,255,255,0.65); --hair: rgba(255,255,255,0.9);
+  --nav-bg: rgba(255,255,255,0.7);
+  --glass-shadow: 0 15px 35px -12px rgba(30,40,60,0.15), 0 2px 6px rgba(30,40,60,0.06);
+  --glass-inner: inset 0 1px 0 rgba(255,255,255,1);
+  --btn-bg: #1A1D21; --btn-text: #fff;
+}
 :root{--radius:24px;--ease:cubic-bezier(0.25,1,0.5,1)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg-gradient);background-attachment:fixed;color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
-body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(circle at 10% 10%, rgba(16,185,129,0.1), transparent 40%);filter:blur(80px)}
+body{background:var(--bg-gradient);background-attachment:fixed;color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;transition:background 0.4s ease, color 0.4s ease}
+body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(circle at 10% 10%, var(--accent-glow), transparent 40%);filter:blur(80px);opacity:0.6;transition:background 0.4s ease}
 body>*{position:relative;z-index:1}
 a{color:var(--accent-light);text-decoration:underline;text-underline-offset:3px}
 
 .nav-wrap{position:sticky;top:0;z-index:100;padding:16px 24px}
-.nav{height:64px;padding:0 24px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);backdrop-filter:blur(40px) saturate(200%);border:1px solid var(--hair);border-radius:999px;box-shadow:var(--glass-shadow),var(--glass-inner)}
+.nav{height:64px;padding:0 24px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);backdrop-filter:blur(40px) saturate(200%);border:1px solid var(--hair);border-radius:999px;box-shadow:var(--glass-shadow),var(--glass-inner);transition:background 0.4s ease}
 .brand{display:flex;align-items:center;gap:2px;font-size:22px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--text) 20%,var(--accent-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .brand .plus{color:var(--accent);-webkit-text-fill-color:var(--accent);font-size:26px}
 .back{font-size:14px;font-weight:600;color:var(--text2);padding:8px 20px;border:1px solid var(--hair);border-radius:999px;transition:all .2s}
@@ -45,56 +65,44 @@ footer{padding:32px 24px;border-top:1px solid var(--hair);display:flex;flex-dire
   h2{font-size:16px}
 }
 </style>
-<script>
-  document.documentElement.setAttribute('data-theme', localStorage.getItem('tpz-theme') || 'dark');
-</script>
 </head>
 <body>
 
 <div class="nav-wrap">
   <nav class="nav">
-    <a href="/" class="brand">TPZ<span class="plus">+</span></a>
-    <a href="/" class="back">← Retour</a>
+    <a href="index.html" class="brand">TPZ<span class="plus">+</span></a>
+    <a href="index.html" class="back">← Retour</a>
   </nav>
 </div>
 
 <main>
-  <h1>Conditions d'utilisation</h1>
-<p>En utilisant TPZ+, vous acceptez les présentes conditions.</p>
-
+  <p>En utilisant TPZ+, vous acceptez les présentes conditions.</p>
 <h2>Service</h2>
 <p>TPZ+ est un site d'agrégation de liens externes. Le site n'héberge et ne diffuse aucun contenu directement.</p>
-
 <h2>Sources</h2>
 <p>Les flux proviennent de plateformes tierces :</p>
 <ul>
   <li><a href="https://www.fctv33.com/" target="_blank" rel="noopener">FCTV33</a></li>
   <li><a href="https://cdnlivetv.is/" target="_blank" rel="noopener">CDN Live TV</a></li>
 </ul>
-<p>TPZ+ ne contrôle pas ces sources.</p>
-
 <h2>Utilisation</h2>
-<p>Vous vous engagez à ne pas utiliser le site à des fins illégales, ni à tenter de contourner ses mesures de sécurité.</p>
-
+<p>Vous vous engagez à ne pas utiliser le site à des fins illégales.</p>
 <h2>Garanties</h2>
-<p>Le site est fourni tel quel, sans garantie de disponibilité ou de qualité des flux référencés.</p>
-
+<p>Le site est fourni tel quel, sans garantie de disponibilité.</p>
 <h2>Responsabilité</h2>
-<p>TPZ+ ne peut être tenu responsable des dommages résultant de l'utilisation du site ou de l'accès aux sources externes.</p>
-
+<p>TPZ+ ne peut être tenu responsable des dommages résultant de l'utilisation du site.</p>
 <h2>Modifications</h2>
 <p>Ces conditions peuvent évoluer. La poursuite de l'utilisation vaut acceptation.</p>
-
 <h2>Droit applicable</h2>
 <p>Droit français.</p>
 </main>
 
 <footer>
   <div class="foot-nav">
-    <a href="/dmca.html">DMCA</a>
-    <a href="/mentions.html">Mentions</a>
-    <a href="/conditions.html">Conditions</a>
-    <a href="/confidentialite.html">Confidentialité</a>
+    <a href="dmca.html">DMCA</a>
+    <a href="mentions.html">Mentions</a>
+    <a href="conditions.html">Conditions</a>
+    <a href="confidentialite.html">Confidentialité</a>
   </div>
 </footer>
 

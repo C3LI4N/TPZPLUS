@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page introuvable - TPZ+</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.setAttribute('data-theme', localStorage.getItem('tpz-theme') || 'dark');</script>
+<style>
+:root, [data-theme="dark"] { --bg:#000;--text:#fff;--text2:rgba(255,255,255,.7);--accent:#10B981;--glass:rgba(255,255,255,0.03);--hair:rgba(255,255,255,0.08);--nav-bg:rgba(10,10,10,0.5);--glass-shadow:0 20px 40px -10px rgba(0,0,0,0.8);--glass-inner:inset 0 1px 0 rgba(255,255,255,0.15);--btn-bg:#fff;--btn-text:#000; }
+[data-theme="light"] { --bg:#EEF0F3;--text:#1A1D21;--text2:#5A6069;--accent:#059669;--glass:rgba(255,255,255,0.65);--hair:rgba(255,255,255,0.9);--nav-bg:rgba(255,255,255,0.7);--glass-shadow:0 15px 35px -12px rgba(30,40,60,0.15);--glass-inner:inset 0 1px 0 rgba(255,255,255,1);--btn-bg:#1A1D21;--btn-text:#fff; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:var(--glass);border:1px solid var(--hair);border-radius:32px;padding:60px 40px;text-align:center;max-width:500px;backdrop-filter:blur(30px);box-shadow:var(--glass-shadow),var(--glass-inner)}
+h1{font-size:80px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:16px}
+p{color:var(--text2);margin-bottom:32px;font-size:16px}
+a{background:var(--btn-bg);color:var(--btn-text);padding:14px 32px;border-radius:999px;font-weight:700;text-decoration:none;display:inline-block;transition:all .2s}
+a:hover{background:var(--accent);color:#000}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>404</h1>
+  <p>Cette page n'existe pas ou a été déplacée.</p>
+  <a href="/index.html">Retour à l'accueil</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /vip/
+Disallow: /channel.html
+
+Sitemap: https://ton-site.com/sitemap.xml

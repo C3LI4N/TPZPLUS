@@ -14,6 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+<script>
+  // Anti-flash thème
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('tpz-theme') || 'dark');
+</script>
+
 <style>
 /* ============ THÈMES ============ */
 :root, [data-theme="dark"] {
@@ -35,8 +40,6 @@
   --btn-bg: #ffffff;
   --btn-text: #000000;
 }
-
-/* ============ MODE CLAIR RETRAVAILLÉ ============ */
 [data-theme="light"] {
   --bg: #EEF0F3;
   --bg-gradient: linear-gradient(180deg, #F7F8FA 0%, #E8EAEE 100%);
@@ -64,7 +67,6 @@
   --radius-pill: 999px;
   --ease: cubic-bezier(0.25, 1, 0.5, 1);
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -79,7 +81,6 @@ body{
   overflow-x: hidden;
   transition: background 0.4s ease, color 0.4s ease;
 }
-
 body::before{
   content: ""; position: fixed; inset: -20%; z-index: 0; pointer-events: none;
   background:
@@ -93,7 +94,6 @@ body > *{position: relative; z-index: 1}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
-/* ============ NAVBAR ============ */
 .nav-wrap { position: sticky; top: 0; z-index: 100; padding: 16px 24px; }
 .nav{
   height: 64px; padding: 0 24px; max-width: 1200px; margin: 0 auto;
@@ -113,7 +113,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 .brand .plus { color: var(--accent); -webkit-text-fill-color: var(--accent); font-size: 26px; }
-
 .tabs{ display: flex; gap: 4px; }
 .tab{
   padding: 8px 16px; border-radius: var(--radius-pill);
@@ -133,7 +132,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .icon-btn:hover { background: var(--glass-hover); transform: scale(1.05); }
 
-/* ============ MAIN ============ */
 main{ flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 20px 24px 80px; }
 .panel{ display: none; }
 .panel.active { display: block; animation: fadeUp .6s var(--ease) forwards; }
@@ -193,8 +191,6 @@ main{ flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 20px 24p
 .filter-pill:hover { color: var(--text); }
 .filter-pill.active { background: var(--accent); color: #000; border-color: transparent; }
 
-.section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
-.section-head h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
 .comp-label {
   font-size: 12px; font-weight: 700; color: var(--text3);
   text-transform: uppercase; letter-spacing: 1.5px;
@@ -259,7 +255,6 @@ main{ flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 20px 24p
 
 .empty-state { text-align: center; padding: 60px 20px; color: var(--text3); font-size: 14px; }
 
-/* ============ FOOTER ============ */
 footer {
   padding: 32px 24px; border-top: 1px solid var(--glass-border);
   display: flex; flex-direction: column; align-items: center; gap: 12px;
@@ -275,7 +270,6 @@ footer {
 .foot-sources { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center; }
 .foot-sources a { color: var(--text2); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 
-/* ============ RESPONSIVE ============ */
 @media(max-width:700px){
   .nav-wrap { padding: 10px; }
   .nav { padding: 0 12px; height: 56px; gap: 8px; }
@@ -288,7 +282,6 @@ footer {
   .hero { padding: 28px 20px; min-height: 200px; border-radius: var(--radius-md); }
   .hero h1 { font-size: 26px; }
   .hero p { font-size: 14px; }
-  .section-head h2 { font-size: 20px; }
   .grid, .channels-grid { grid-template-columns: 1fr; }
   .match { padding: 12px; gap: 12px; }
   .match-img { width: 56px; height: 56px; border-radius: 12px; }
@@ -296,19 +289,7 @@ footer {
   .search-input { padding: 12px 16px 12px 42px; font-size: 14px; }
   footer { padding: 24px 12px; }
 }
-
-html.intro .nav-wrap { opacity: 0; transform: translateY(-20px); }
-html.intro main > * { opacity: 0; transform: translateY(20px); }
-html.intro footer { opacity: 0; }
-.nav-wrap, main > *, footer { transition: all .6s var(--ease); }
 </style>
-
-<script>
-  const savedTheme = localStorage.getItem('tpz-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  document.documentElement.classList.add('intro');
-  setTimeout(() => document.documentElement.classList.remove('intro'), 100);
-</script>
 </head>
 <body>
 
@@ -333,20 +314,18 @@ html.intro footer { opacity: 0; }
       <p>Les plus grands matchs en direct. Une expérience fluide et immersive.</p>
       <button class="btn-hero" id="heroBtn">Voir les directs →</button>
     </div>
-    
     <div class="search-wrap">
       <div class="search-container">
         <span class="search-icon">🔍</span>
         <input type="text" class="search-input" id="searchInput" placeholder="Rechercher un match, une équipe...">
       </div>
     </div>
-    
     <div class="filters" id="filters"></div>
     <div id="matches-content"></div>
   </div>
   
   <div class="panel" id="panel-channels">
-    <div class="section-head"><h2>Toutes les chaînes</h2></div>
+    <div class="comp-label">Toutes les chaînes</div>
     <div class="grid channels-grid" id="channels-content"></div>
   </div>
 </main>
@@ -365,6 +344,7 @@ html.intro footer { opacity: 0; }
   </div>
 </footer>
 
+<script src="links.js"></script>
 <script src="streams.js"></script>
 <script src="channels.js"></script>
 <script>
@@ -394,7 +374,6 @@ function renderFilters() {
 function renderMatches(){
   const cont = document.getElementById('matches-content');
   let all = (window.TPZ_STREAMS||[]).filter(m => m.visible !== false);
-
   if(currentFilter !== 'all') all = all.filter(m => m.sport === currentFilter);
   if(currentSearch) {
     const q = currentSearch.toLowerCase();
@@ -404,23 +383,18 @@ function renderMatches(){
       (m.sport||'').toLowerCase().includes(q)
     );
   }
-
   renderFilters();
-
   if(!all.length){
     cont.innerHTML = `<div class="empty-state">Aucun match trouvé.</div>`;
     return;
   }
-
   all.sort((a,b)=>(a.priorite||99)-(b.priorite||99));
-
   const groups = {};
   all.forEach(m => {
     const s = m.sport || "Autres";
     if(!groups[s]) groups[s] = [];
     groups[s].push(m);
   });
-
   let html = '';
   for(const s in groups){
     html += `<div class="comp-label">${s}</div><div class="grid">`;
@@ -428,14 +402,12 @@ function renderMatches(){
       let isLive = true;
       if(m.forceLive) isLive = true;
       else if(m.heureDebut && parisTime(m.heureDebut) > Date.now()) isLive = false;
-
       const status = isLive 
         ? `<div class="status live"><span class="status-dot"></span>En direct</div>` 
         : `<div class="status waiting">À venir</div>`;
       const btn = isLive 
         ? `<button class="btn-watch" onclick="location.href='vip/index.html?id=${m.id}'">Regarder</button>` 
         : `<button class="btn-soon" disabled>Bientôt</button>`;
-
       html += `
         <div class="match ${isLive?'is-live':''}" style="${isLive?'':'opacity:.6'}">
           <img class="match-img" src="${m.image||FALLBACK}" alt="" onerror="this.onerror=null;this.src='${FALLBACK}'">
@@ -456,9 +428,7 @@ async function renderChannels(){
   const cont = document.getElementById('channels-content');
   if(!window.TPZ_CHANNELS_LOADED && typeof loadChannels === 'function') await loadChannels();
   const chans = window.TPZ_CHANNELS || [];
-
   if(!chans.length){ cont.innerHTML = '<div class="empty-state">Aucune chaîne.</div>'; return; }
-
   cont.innerHTML = chans.map(ch => {
     const online = ch.status === 'online';
     const link = online ? `channel.html?name=${encodeURIComponent(ch.name)}&url=${encodeURIComponent(ch.url)}` : '#';

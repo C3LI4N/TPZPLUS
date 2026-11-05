@@ -1,27 +1,3 @@
-/**
- * ====================================================
- * FICHIER DE CONFIGURATION DES MATCHS
- * ====================================================
- * Ajoute tes matchs ici. Chaque match est un objet.
- * 
- * Propriétés obligatoires :
- * - id : identifiant unique (pas d'espaces)
- * - nom : Nom du match (ex: "PSG 🆚 OM")
- * - sport : Catégorie (ex: "⚽ Football")
- * - competition : Ligue (ex: "Ligue 1")
- * - langues : Tableau d'objets { code, label, url }
- * 
- * Propriétés optionnelles :
- * - image : URL de l'image (laisser vide "" pour fallback)
- * - heureDebut : Format ISO (ex: "2026-10-04T09:00:00+02:00")
- * - forceLive : true pour forcer le live peu importe l'heure
- * - priorite : 1 = en haut de la liste
- * - visible : false pour cacher le match
- * - stats : Objet avec les statistiques (voir exemple plus bas)
- * - timeline : Tableau d'événements du match
- * - compositions : Objet avec les joueurs des deux équipes
- */
-
 window.TPZ_STREAMS = [
     {
         id: "psg-om",
@@ -34,10 +10,8 @@ window.TPZ_STREAMS = [
         visible: true,
         forceLive: true,
         langues: [
-            { code: "FR", label: "Français", url: "https://ton-lien-stream1.m3u8" },
-            { code: "EN", label: "English", url: "https://ton-lien-stream1-en.m3u8" }
+            { code: "FR", label: "Français", url: "https://ton-lien-stream1.m3u8" }
         ],
-        // VRAIES DONNÉES POUR LA PAGE MATCH
         stats: {
             possession: [58, 42],
             tirsCadres: [6, 3],
