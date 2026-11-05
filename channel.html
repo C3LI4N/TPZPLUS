@@ -132,7 +132,13 @@ if (!channelName || !channelUrl) {
     if(loaded) return;
     loaded = true;
     const player = document.getElementById('player');
-    player.innerHTML = `<iframe src="${decodeURIComponent(channelUrl)}" allowfullscreen allow="autoplay; encrypted-media; fullscreen"></iframe><div class="shield top"></div><div class="shield bot"></div>`;
+    // CORRECTION : allowlist réduite aux features supportées + autoplay
+    player.innerHTML = `<iframe 
+      src="${decodeURIComponent(channelUrl)}" 
+      allowfullscreen 
+      allow="autoplay; fullscreen; picture-in-picture"
+      referrerpolicy="no-referrer"
+    ></iframe><div class="shield top"></div><div class="shield bot"></div>`;
   });
 }
 document.addEventListener('contextmenu', e => e.preventDefault());
